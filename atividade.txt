@@ -1,0 +1,26 @@
+1º item
+no arquivo models.py inseri o codigo:
+data_publicacao = models.DateField('data Publicação', max_length=128, blank=True, null=True)
+-fui no terminal e digitei: python manage.py makemigrate e em seguida python manage.py migrate
+
+2º item - crie 5 noticias
+primeiro o comando python .\manage.py shell
+	from app_noticias.models import Noticia
+	Noticia.objects.create(titulo =" Noticia 1",conteudo = "conteudo da noticia 1", autor ="stefan", data_publicacao='2020-03-06')
+	Noticia.objects.create(titulo =" Noticia 2",conteudo = "conteudo da noticia 2", autor ="fabio", data_publicacao='2020-01-06')
+	Noticia.objects.create(titulo =" Noticia 3",conteudo = "conteudo da noticia 3", autor ="fabio", data_publicacao='2020-02-06')
+	Noticia.objects.create(titulo =" Noticia 4",conteudo = "conteudo da noticia 4", autor ="Roberto", data_publicacao='2020-01-06')
+	Noticia.objects.create(titulo =" Noticia 5",conteudo = "conteudo da noticia 5", autor ="Roberto", data_publicacao='2020-03-06')
+
+3º item - Recupere as noticias do mês de janeiro que tem “Fabio” como autor
+	recuperacao=Noticia.objects.filter(autor="fabio").filter(data_publicacao__month= 1)
+
+4º item - Recupere todas as noticias que não são do autor “Roberto”
+	recuperacao=Noticia.objects.filter(autor="Roberto")
+
+5º item - Atualize o autor da noticia de id 6
+	update=Noticia.objects.get(id=10) obs: coloquei id 10 pois n tenho id = 6 cadastrado
+	update.autor= "Stefan"
+	update.save()
+6º item - Recupere as 3 primeiras noticias do autor “Roberto” que não são do mês de Março
+	recuperacacao2 = Noticia.objects.filter(autor="Roberto").exclude(data_publicacao__month=3)
